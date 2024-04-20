@@ -1,21 +1,30 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<link th:href="@{/style.css}" rel="stylesheet"/>
 <head>
     <meta charset="UTF-8">
     <title>Create User</title>
 </head>
 <body>
-<form action="#" th:action="@{/user-update}" th:object="${user}" method="post">
-    <label for="id">ID</label>
-    <input readonly type="number" th:field="*{id}" id="id" placeholder="ID">
-    <br/>
-    <label for="firstName">First Name</label>
-    <input type="text" th:field="*{firstName}" id="firstName" placeholder="First Name">
-    <br/>
-    <label for="lastName">Last Name</label>
-    <input type="text" th:field="*{lastName}" id="lastName" placeholder="Last Name">
-    <br/>
-    <input type="submit" value="Update User">
-</form>
+    <div class="box tablebox">
+        <form action="#" th:action="@{/user-update}" th:object="${user}" method="post">
+            <div class="edit">
+            <label for="id">ID</label>
+            <input readonly type="number" th:field="*{id}" id="id" placeholder="ID">
+            </div>
+            <br/>
+            <div class="edit">
+            <label for="firstName">First Name</label>
+            <input type="text" th:field="*{firstName}" id="firstName" placeholder="First Name">
+            </div>
+            <br/>
+            <div class="edit">
+            <label for="lastName">Last Name</label>
+            <input type="text" th:field="*{lastName}" id="lastName" placeholder="Last Name">
+            </div>
+            <br/>
+            <input class="button" type="submit" value="Update User">
+        </form>
+    </div>
 </body>
 </html>
