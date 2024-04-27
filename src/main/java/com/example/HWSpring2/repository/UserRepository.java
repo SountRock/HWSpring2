@@ -1,6 +1,7 @@
 package com.example.HWSpring2.repository;
 
 import com.example.HWSpring2.model.User;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -9,16 +10,15 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
+@AllArgsConstructor
 public class UserRepository {
     @Autowired
     private final JdbcTemplate jdbc;
-
-    public UserRepository(JdbcTemplate jdbc) {
-        this.jdbc = jdbc;
-    }
+    @Autowired
+    private final QuaryBiblio biblio;
 
     public List<User> findAll(){
-        String sql = "SELECT * FROM userTable";
+        String sql = biblio.getFindAll();
         RowMapper<User> userRowMapper = (r, i) -> {
             User rowObject = new User();
             rowObject.setId(r.getInt("id"));
@@ -33,25 +33,25 @@ public class UserRepository {
     }
 
     public User save(User user){
-        String sql = "INSERT INTO userTable(firstName,lastName) VALUES ( ? , ? )";
+        String sql = biblio.getSave();
         jdbc.update(sql, user.getFirstName(), user.getLastName());
 
         return user;
     }
 
     public void deleteById(int id){
-        String sql = "DELETE FROM userTable WHERE id=?";
+        String sql = biblio.getDeleteById();
         jdbc.update(sql, id);
     }
 
     public void updateById(User user){
-        String sql = "UPDATE userTable SET firstName=?, lastName=? WHERE id=?;";
+        String sql = biblio.getUpdateById();
 
         jdbc.update(sql, user.getFirstName(), user.getLastName(), user.getId());
     }
 
     public User getOne(int id){
-        String sql = "SELECT * FROM userTable WHERE id = :id";
+        String sql = biblio.getGetOne();
         sql = sql.replaceAll(":id", String.valueOf(id));
 
         RowMapper<User> userRowMapper = (r, i) -> {

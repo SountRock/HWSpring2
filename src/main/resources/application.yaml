@@ -1,0 +1,15 @@
+server:
+  port: 9090
+
+spring:
+  application:
+    name: HWSpring2
+
+#Запросы:
+quary:
+  findAll: "SELECT * FROM userTable"
+  save: "INSERT INTO userTable(firstName,lastName) VALUES ( ? , ? )"
+  deleteById: "DELETE FROM userTable WHERE id=?"
+  updateById: "UPDATE userTable SET firstName=?, lastName=? WHERE id=?;"
+  getOne: "SELECT * FROM userTable WHERE id = :id"
+
